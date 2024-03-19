@@ -1,0 +1,62 @@
+# # jekyll-docker.yml
+# name: Jekyll site CI
+
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   build:
+
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - uses: actions/checkout@v3
+#     - name: Build the site in the jekyll/builder container
+#       run: |
+#         docker run \
+#         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+#         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+
+
+
+
+name: Render RMD
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v2
+    
+    - name: Install pandoc
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc
+    
+    - name: Install R Markdown and dependencies
+      run: Rscript -e 'install.packages("rmarkdown")'
+    
+    - name: Render R Markdown to HTML
+      # run: Rscript -e 'rmarkdown::render("computational_resources.Rmd")'
+      run: Rscript -e 'rmarkdown::render("computational_resources.Rmd", output_format="html_document")'
+      # run: Rscript -e 'rmarkdown::render("computational_resources.Rmd", output_format="md_document")'
+
+    
+    - name: Commit and Push Rendered HTML
+      run: |
+        git config --local user.email "fkariminejadasl@gmail.com"
+        git config --local user.name "Fatemeh Karimi Nejadasl"
+        git add -f *.html
+        git commit -m "Render RMD to HTML [skip ci]" -a || echo "No changes to commit"
+        git push

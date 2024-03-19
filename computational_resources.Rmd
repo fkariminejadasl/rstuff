@@ -1,0 +1,341 @@
+---
+title: "Computational Resources"
+author:
+  - Thijs de Boer ([Manager GIS Studio](https://www.uva.nl/en/profile/b/o/w.m.deboer/w.m.deboer.html){target="_blank"})
+  - Johannes De Groeve ([Data Manager](https://ibed.uva.nl/profile/d/e/j.degroeve/j.de-groeve.html){target="_blank"})
+  - Nina Dombrowski ([Bioinformatician](https://ibed.uva.nl/profile/d/o/n.dombrowski/n.dombrowski.html){target="_blank"})
+  - Fatemeh Karimi Nejadasl ([Machine Learning Expert](https://ibed.uva.nl/profile/k/a/f.karimi-nejadasl/f.karimi-nejadasl.html){target="_blank"})
+  - Stacy Shinneman ([Geoinformatician](https://ibed.uva.nl/profile/s/h/s.shinneman/s.shinneman.html){target="_blank"})
+  - Berend Wijers ([High Performance Computing Expert](https://ibed.uva.nl/profile/w/i/b.c.wijers/b.c.wijers.html){target="_blank"})
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  word_document:
+    toc: yes
+    toc_depth: 3
+    number_sections: yes
+  pdf_document:
+    toc: yes
+    toc_depth: 3
+    number_sections: yes
+    latex_engine: xelatex #xelatex  # or lualatex
+  html_document:
+    css: html-md-01.css
+    toc: yes
+    number_sections: yes
+    toc_float: yes
+    toc_collapsed: yes
+    toc_depth: 3
+    theme: lumen
+subtitle: Access, Tips and Tricks
+project_acronym: ""
+params:
+  include_code: no
+  fig_path: NULL # ../docs/figs/ # if NULL figures are not exported
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(dev = "png",
+                      dpi = 600,
+                      out.width="100%",
+                      echo = params$include_code)
+options(scipen = 999)
+# knitr::opts_chunk$set(fig.path = "../docs/figs/")
+# knitr::opts_chunk$set(fig.cap = "../docs/figs/")
+
+```
+
+```{r render, echo=F, eval=F}
+# Render the R Markdown document without code
+rmarkdown::render("computational_resources.Rmd", 
+                  params = list(include_code = FALSE),
+                  output_format='html_document',
+                  output_file='./index.html')
+
+rmarkdown::render("computational_resources.Rmd",
+                  output_format='word_document',
+                  params = list(include_code = FALSE),
+                  output_file='./computational_resources.docx')
+
+rmarkdown::render("computational_resources.Rmd",
+                  output_format='pdf_document',
+                  params = list(include_code = FALSE),
+                  output_file='./computational_resources.pdf')
+```
+
+
+<!-- ![Computational Support Logo](../path/to/image.png) -->
+
+\newpage
+
+# Introduction 
+
+The UvA is fully committed to the principles of Open Science, emphasizing transparency and reproducibility in research. Open Science involves making scientific research freely accessible to everyone in society, ensuring research results are widely available. Open Science follows the FAIR (findable, accessible, interoperable, reusable) principles. To ensure Open Science, for every project, whether it is a grant, a publication or a student project, the following general four guiding rules hold. 
+
+It is crucial to:
+
+* Develop a data management plan at the beginning of your project 
+* Maintain good data management practices during the project 
+* Create a well-organized, self-contained archive at the project's conclusion 
+* Share it with the scientific community in a data repository 
+
+To further support good data management practices, IBED provides a **[Data Management Bonus](https://amsuni.sharepoint.com/:b:/r/sites/FNWI_ORG_IBED/Gedeelde%20documenten/General/Computational%20Resources/IBED%20data%20management/IBEDDataManagementBonusGuidelineForPhDsAndPostdocs/0_IBEDDataManagementBonusGuidelineForPhDsAndPostdocs.pdf?csf=1&web=1&e=h6b6Bs){target="_blank"}** of 1000 euro to PhDs and Postdocs who succeed, by the end of their project, to deliver such a well-organized and self-contained archive. To support research at scale, this page describes computational resources available for IBED. The document provides both guidelines and resources (Storage, Archiving, HPC). We conclude with a list of resources for courses and trainings offered by UvA, including good data management and computational practices. This document is tailored to IBED, but for more generic information on available resources at faculty level check **[Data Analytics and Statistics Hub (DASH)](https://dash.science.uva.nl/){target="_blank"}**. 
+
+\newpage
+
+# Data Management Plan
+
+For almost all funding agencies a Data Management Plan (DMP) is a requirement. To prepare your DMP it is recommended to create an account at **[DMPonline](https://dmponline.dcc.ac.uk){target="_blank"}**. Most likely the template of your grant (e.g. NWO) will be available within the platform. Alternatively, you can use a template of the funding organization. Prepare your DMP and invite the IBED data steward (Johannes De Groeve) for review to check if the DMP is in line with **[FNWI RDM policy](https://amsuni.sharepoint.com/sites/FNWI_ORG_FB_RDM/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FFNWI%5FORG%5FFB%5FRDM%2FShared%20Documents%2FGeneral%2FPolicy%20Documents%2FPolicy%2Epdf&parent=%2Fsites%2FFNWI%5FORG%5FFB%5FRDM%2FShared%20Documents%2FGeneral%2FPolicy%20Documents){target="_blank"}** and **[institutional RDM protocol](https://amsuni.sharepoint.com/:b:/r/sites/FNWI_ORG_IBED/Gedeelde%20documenten/General/Computational%20Resources/IBED%20data%20management/Research%20Data%20Management%20Protocol.pdf?csf=1&web=1&e=Ohgvfa){target="_blank"}**. For examples of successful DMPs within IBED, please check **[here](https://amsuni.sharepoint.com/:f:/r/sites/FNWI_ORG_IBED/Gedeelde%20documenten/General/Computational%20Resources/Data%20Management%20Plans?csf=1&web=1&e=0Tsu6f){target="_blank"}**.  
+
+Typical questions and topics which are addressed in a DMP include: 
+
+* How will data be collected
+* How will data be stored and backed up
+* How will data be processed and analyzed
+* How will data be shared and disseminated
+* How will data be preserved
+* Data formats and standards
+* Metadata standards
+* Version control procedures
+* Is there a budget required for data management activities
+* Who is responsible for which data management tasks
+* Who will access the data and security procedures (e.g. personal data)
+
+Answering these questions will streamline decisions about which computational resources you require during the project, including which type(s) of institutional storage are most applicable and which High Performance Computational needs there are. Moreover, it will help you to define better a well defined project directory structure. DMP's are often only created when obliged by funders. However, whether you are a student or a PI, it is always recommended to think in advance about the above questions. 
+
+This will help with:
+
+* Working in a structured manner 
+  - avoid having all your files and data scattered without naming conventions or file organisation 
+* Prevent you from losing time 
+  - you lost track of what is the right dataset or code
+  - you forgot the meaning of your columns
+  - you don't remember the analysis workflow
+* Facilitate how you share your research 
+  - with your PI
+  - with external collaborators 
+
+\newpage
+
+# Project Setup
+
+A common issue that most students and PI's encounter is how to keep their project organized. The starting point to keep your project organized is to define a project directory structure for each individual project unit  (e.g. a manuscript, Bsc/Msc thesis). The directory structure and what can be defined as a project unit, is based on knowledge that you gained from your project proposal's roadmap and DMP. While project units can change over time it is good to have an initial starting point of basic organisation. Here we provide some basic examples. To set-up basic R-project please check the following [tutorial]() [TO BE CREATED].
+
+<!-- Here is a possible workflow:  -->
+
+<!-- - Create a data management plan and identify distinct project units (e.g., R-package, Manuscript) -->
+<!-- - Install a desktop client for your institutional cloud storage if available  -->
+<!-- - Create a repository for a distinct project unit in github/gitlab  -->
+<!-- - Clone the repository on your desktop, preferably in a cloud data store (Research Drive, OneDrive) -->
+<!-- - Define a repository structure (see below for some possible repository structures) -->
+<!-- - Create a .gitignore file in the root of the project: define which files should not be in gitlab/github -->
+<!-- - Large File Support: enable LFS if you want to host larger datasets without versioning the dataset -->
+
+<!-- Using this approach you can keep your project data and code within the same space, you will have a cloud backup of data and code, and your code will also be available in git. In addition you could also opt to have an additional backup of your computer on an external hard drive.  -->
+
+**Basic project directory structure**
+
+**Example 1**
+
+```
+.
+├── README.md
+├── code
+│   ├── 0_data_preparation.Rmd
+│   └── 1_analysis.Rmd
+├── data
+│   ├── input
+│   └── output
+├── docs
+│   ├── manuscript.docx
+│   ├── figs
+│   └── tabs
+└── project_name.Rproj
+```
+
+**Example 2**
+
+```
+.
+├── README.md
+├── code
+│   ├── 0_data_preparation.Rmd
+│   └── 1_analysis.Rmd
+├── data
+│   ├── raw
+│   └── processed
+├── docs
+│   ├── manuscript.docx
+│   ├── figs
+│   └── tabs
+└── project_name.Rproj
+```
+
+\newpage
+
+# Data Storage
+
+To be in line with institutional policy, prior to publication, researchers need to ensure research data is accessible through an institutional cloud storage solution. Depending from the needs including size, speed, resources, programmatically accessibility, etc. different storage solutions are offered to IBED staff and students. Here we list all the storage resources which can be used for ongoing research. 
+
+## Research Drive
+
+* **When to use:** Project-specific research data, ideal for collaboration provided by uva IT services.
+* **Features:** Store and share files/data with internal/external collaborators, (programmatically) accessible from computing resources.
+* **Access:** Request via **[topdesk](https://uva-icts.topdesk.net/tas/public/ssp/content/serviceflow?unid=cf41943dbae64c77894b3d1007a24721&openedFromService=true){target="_blank"}** selfservice portal by PIs or coordinators.
+* **Cost:** FREE
+* **Documentation:** 
+  - **[Best practices](https://wiki.surfnet.nl/display/RDRIVE/Best+practice){target="_blank"}**
+  - **[How to upload or download files](https://wiki.surfnet.nl/display/RDRIVE/How+to+upload+or+download+your+files){target="_blank"}**
+<!-- * **Known Issues:** -->
+<!--   - File drop/upload via shared link of large files: Use CURL or rclone. -->
+
+## OneDrive
+
+* **When to use:** Personal file storage in Microsoft 365 cloud.
+* **Access:** **[Through browser](http://www.office.com){target="_blank"}** or Windows File Explorer on UvA computers.
+* **Features:** Backup files, 1 TB limit.
+* **Cost:** FREE
+
+## Tape SURF
+
+* **When to use:** Long-term storage for infrequently accessed data (project-paid).
+* **Access:** **[SURF service desk](https://servicedesk.surfsara.nl/jira/plugins/servlet/desk/portal/1){target="_blank"}**.
+* **Features:** Long-term data storage in compressed units, 10 TB for 5 years at 150 euros per year.
+* **Cost:** 150 euros per year (750 euros for 5 years)
+* **Documentation:** **[More Info](https://servicedesk.surf.nl/wiki/display/WIKI/Data+Archive){target="_blank"}**
+
+## Tape IBED
+
+* **When to use:** Long-term storage for infrequently accessed data (non-project).
+* **Access:** Request via Computational Support IBED (see **[IBED tape archive usage and policy](https://amsuni.sharepoint.com/:b:/r/sites/FNWI_ORG_IBED/Gedeelde%20documenten/General/Computational%20Resources/IBED%20Tape%20Archive%20Usage%20and%20Policy.pdf?csf=1&web=1&e=OBwdjm){target="_blank"}**)
+* **Features:** Long-term data storage in compressed units.
+* **Cost:** 5TB FREE
+* **Documentation:** **[More Info](https://servicedesk.surf.nl/wiki/display/WIKI/Data+Archive){target="_blank"}**
+
+## IBED PhD/Postdoc Data Archive
+
+* **When to use:** Centralized storage for PhD/Postdoc data archives.
+* **Access:** Data Manager provides access upon submission of a data archive.
+* **Features:** PI can download and share files stored in the archive.
+* **Cost:** FREE
+* **Documentation:** **[More Info](https://amsuni.sharepoint.com/:b:/r/sites/FNWI_ORG_IBED/Gedeelde%20documenten/General/Computational%20Resources/IBED%20data%20management/IBEDDataManagementBonusGuidelineForPhDsAndPostdocs/0_IBEDDataManagementBonusGuidelineForPhDsAndPostdocs.pdf?csf=1&web=1&e=h6b6Bs){target="_blank"}**
+
+\newpage
+
+# Data Publication
+
+At closure of a project (student, publication) data and code are required to be published in a **data repository** following the Open Science and FAIR principles. Many general purpose and domain-specific repositories exist (see below). 
+
+An important general purpose repository is Figshare, for which UvA provides an UvA/AUAS institutional account for every staff member. Note that BSc and MSc students do not have access to the institutional Figshare. BSc and MSc students can create accounts and upload files up to 5GB for open data and materials. However, we highly recommend researchers to invite students by creating a "project" via their institutional account. Through this venue the research data is accessible to the PI in a public repository owned by UvA and there are no storage limitations. 
+
+## Figshare
+
+* **When to use:** Archive and publish data attached to a publication.
+* **Access:** **[Procedure](https://rdm.uva.nl/en/uva-auas-figshare/access/access.html){target="_blank"}**.
+* **Features:** Make data linked to a publication available online, generate doi, add metadata.
+* **Cost:** FREE
+* **Documentation:** **[Figshare Help](https://help.figshare.com/){target="_blank"}**, **[How to upload and publish data](https://help.figshare.com/article/how-to-upload-and-publish-your-data){target="_blank"}**
+
+## (Domain-Specific) Repositories
+
+- **[Zenodo](https://zenodo.org/){target="_blank"}**: General purpose, 50GB limit, offers options for single or multiple file uploads.
+- **[Datadryad](https://datadryad.org/){target="_blank"}**: General disciplines, 300GB limit, $120USD base price.
+- **[NCBI](https://www.ncbi.nlm.nih.gov/){target="_blank"}**: For biomedical and genomic information.
+- **[Pangaea](https://www.pangaea.de/){target="_blank"}**: Earth science data, free but asks for a contribution.
+- **[Movebank](https://www.movebank.org/){target="_blank"}**: Movement data.
+- **[Paleobiodb](https://paleobiodb.org/){target="_blank"}**: Paleo data.
+- **[TRY-db](https://www.try-db.org/){target="_blank"}**: Plant traits.
+- **[re3data](http://www.re3data.org/){target="_blank"}**: Search all available scientific repositories.
+
+\newpage
+
+
+# HPC
+
+There are several options available to IBED staff and students who need extra computing capacity. We distinguish two Virtual Research Environments (VRE, Research Cloud) and three clusters (Crunchomics, Snellius, Spider / Grid). See the full list below. 
+
+Before applying for HPC resources, consider the following questions:
+
+* Do you know how to use HPC systems?
+* Do you need GPU or CPU (or both)?
+* Do you know exactly what you need?
+* How quickly do you need to get started and for how long?
+* Anything specific regarding large datasets?
+* Does it have to be completely free, or do you have project money?
+
+*The Computational Support Team can help people decide which option to use. The student or staff member should then contact the service's help desks to get access and troubleshoot specific problems.*
+
+## Virtual Research Environment
+
+* **What is it:** Cloud-based, lightweight work environment provided by UvA IT-services.
+* **Features:**
+  - Fully customizable in terms of computing power, storage capacity, and tools.
+  - Suitable for maintaining a service or tool.
+  - Runs on Linux or Windows on Microsoft Azure, and may later be available on SURF Cloud and Amazon AWS.
+* **Access:** Request via [topdesk](https://uva-icts.topdesk.net/tas/public/ssp/content/serviceflow?unid=cf41943dbae64c77894b3d1007a24721&openedFromService=true) selfservice portal by PIs or coordinators.
+* **Cost:** Probably free for small projects; may need to pay for large projects.
+* **Documentation:** **[more info](https://medewerker.uva.nl/en/content-secured/az/virtual-research-environment/virtual-research-environment.html){target="_blank"}**
+
+## Research Cloud
+
+* **What is it:** SURF collaborative environment and portal to different cloud providers.
+* **Features:**
+  - Everything done through a workspace.
+  - Can connect to data on Research Drive.
+* **Access:** Contact SURF support desk or send an email to servicedesk@surf.nl.
+* **Cost:** Pay with project budget if possible. E-infra grants available for students.
+* **Documentation:** **[more info](https://servicedesk.surf.nl/wiki/display/WIKI/SURF+Research+Cloud){target="_blank"}**
+
+## Crunchomics
+
+* **What is it:** FNWI (FEOIG) service for running heavy calculations.
+* **Features:**
+  - CPUs, GPUs, large memory nodes.
+  - Group creation and collaboration.
+* **Access:** Email Wim de Leeuw with your uva-net ID.
+* **Cost:** Available and free for IBED and SILS.
+* **Documentation:** **[more info](https://crunchomics-documentation.readthedocs.io/en/latest/){target="_blank"}**
+
+## Snellius
+
+* **What is it:** SURF service providing access to Dutch national cluster supercomputer.
+* **Features:** CPUs, GPUs, large symmetric multi-processing nodes.
+* **Access:** Through SURF request portal.
+* **Cost:** Researchers can apply for computing time, data services, and support. Large scale research projects need to apply via NWO.  
+* **Documentation:**: **[more info](https://servicedesk.surf.nl/wiki/display/WIKI/Snellius){target="_blank"} and [tutorial GPU access](https://github.com/fkariminejadasl/ml-notebooks/tree/main/tutorial){target="_blank"}**
+
+## Spider and the Grid
+
+* **What is it:** Data processing platforms at SURF for highly parallel jobs on distributed resources.
+* **Features:** Suitable for large, structured datasets.
+* **Access:** Contact SURF support desk or send an email to servicedesk@surf.nl.
+* **Documentation:** **[more info](https://servicedesk.surf.nl/wiki/display/WIKI/Spider){target="_blank"}**
+
+\newpage
+
+# Code Versioning
+
+Imagine you have a piece of code, and you're keen on tracking its changes without losing the original version. The conventional method involves saving scripts as new files, often labeled with indicators like 'v0' or a timestamp. Git offers a more seamless way to version your code without the hassle of managing different version files manually. It not only tracks changes made to your files but also equips you with tools to document those changes. While Git's initial development focused on code versioning, it's versatile enough to handle versioning of smaller datasets. GitHub and GitLab support various text file formats (e.g., csv, fasta), making them ideal for versioning. 
+
+# Training and Courses at UvA
+
+* **[Amsterdam Science Park Study Group](https://www.scienceparkstudygroup.info/){target="_blank"}**
+* **[Data Science Centre](https://uba.uva.nl/en/support/research/data-science-centre/data-science-centre.html){target="_blank"}**
+* **[UvA Library](https://uba.uva.nl/en/support/workshops/workshops.html){target="_blank"}**
+
+# Additional Tutorials 
+
+* **[Accessing GPUs](https://github.com/fkariminejadasl/ml-notebooks/tree/main/tutorial){target="_blank"}**
+* **[R-packaging](https://jedgroev.github.io/SCC_R_package/){target="_blank"}**
+* **[Git basics](https://github.com/fkariminejadasl/ml-notebooks/blob/main/tutorial/git.md){target="_blank"}**
+* **[Bioinformatics](https://scienceparkstudygroup.github.io/software_information/){target="_blank"}**
+* **[Deep learning](https://github.com/fkariminejadasl/ml-notebooks){target="_blank"}**
+ 
+
+
+Please submit an **[issue](https://gitlab.com/uva_ibed/cs/computational_resources/-/issues){target="_blank"}** for improvements to the documentation, or contact the Computational Support Team of IBED.  
+
+
+```{r data,  message=FALSE, warning=FALSE}
+
+```
+
